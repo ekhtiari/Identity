@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Identity.Data;
 using Identity.Models;
+using Identity.Plugins;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -49,7 +50,7 @@ namespace Identity
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
             })
-             //.AddClaimsPrincipalFactory<MyUserClaimsPrincipalFactory>()             
+             .AddClaimsPrincipalFactory<MyUserClaimsPrincipalFactory>()             
              .AddDefaultTokenProviders()
              .AddEntityFrameworkStores<ApplicationDbContext>();
 
