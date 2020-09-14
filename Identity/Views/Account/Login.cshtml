@@ -1,0 +1,66 @@
+﻿
+
+
+@model Identity.Models.User.LoginViewModel
+@{
+    ViewData["Title"] = "Tebnegar - Log in";
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Bootstrap Gallery">
+    <link rel="stylesheet" href="~/Login/bootstrap.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/Login/icomoon.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/Login/main.css" asp-append-version="true">
+    <title>Log in</title>
+
+</head>
+
+<body class="login-bg">
+
+    <!-- Container start -->
+    <div class="container">
+
+
+        <div class="row justify-content-md-center">
+            <div class="col-xl-4 col-lg-5 col-md-6 col-sm-12">
+                <div class="login-screen">
+                    <div class="login-box">
+                        <p class="text-danger">@ViewBag.LoginError</p>
+                        <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                           
+                            <div class="form-group">
+                                <input asp-for="UserName" type="text" class="form-control" placeholder="Username">
+                                <span asp-validation-for="UserName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="Password" type="password" class="form-control" placeholder="Password">
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="actions">
+                                <button type="submit" class="btn btn-primary btn-block">Login</button>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- Container end -->
+
+
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+
+</body>
+</html>
