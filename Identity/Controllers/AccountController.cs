@@ -52,22 +52,22 @@ namespace Identity.Controllers
             if (ModelState.IsValid)
             {
 
-                //var user =await userManager.FindByNameAsync(model.UserName);
+                var user =await userManager.FindByNameAsync(model.UserName);
 
-                //if (user.UserIdentity=="login")
-                //{
-                //    ViewBag.LoginError="This account already login . please try another account";
-                //    return View(model);
-                //}
+                if (user.UserIdentity == "login")
+                {
+                    ViewBag.LoginError = "This account already login . please try another account";
+                    return View(model);
+                }
 
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    // HttpContext.User.Identities.FirstOrDefault().AddClaim(new System.Security.Claims.Claim("UserIdentity", user.UserIdentity ?? "login"));
-
-                    //return RedirectToAction("MyOrder");
+                 
+                    user.UserIdentity="login";
+                    db.SaveChanges();
                     return RedirectToAction(nameof(HomeController.Index), "Home");
                 }
 
@@ -100,11 +100,11 @@ namespace Identity.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Logout()
         {
-            //var userId = this.User.GetUserId();
-            //var user =await userManager.FindByIdAsync(userId);
+            var userId = this.User.GetUserId();
+            var user =await userManager.FindByIdAsync(userId);
 
-            //user.UserIdentity="";
-            //db.SaveChanges();
+            user.UserIdentity = "";
+            db.SaveChanges();
 
             await _signInManager.SignOutAsync();
 

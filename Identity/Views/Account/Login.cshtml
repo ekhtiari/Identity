@@ -35,7 +35,7 @@
                     <div class="login-box">
                         <p class="text-danger">@ViewBag.LoginError</p>
                         <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
-                           
+
                             <div class="form-group">
                                 <input asp-for="UserName" type="text" class="form-control" placeholder="Username">
                                 <span asp-validation-for="UserName" class="text-danger"></span>
@@ -58,7 +58,7 @@
     </div>
     <!-- Container end -->
 
-
+    <script src="/lib/jquery/dist/jquery.js"></script>
     @await Html.PartialAsync("_ValidationScriptsPartial")
 
 
